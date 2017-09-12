@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="/bower_components/jQuery/dist/jquery.js"></script>
+    <script src="/bower_components/fixedBG/dist/jquery.fixedbg.js"></script>
+    <style>
+        body {margin:0;padding:0}
+        #wrap {min-width:1200px}
+        .inner {overflow:hidden;height:100%}
+        #left-section {width:37.5%;float:left;position:relative;overflow:hidden;margin-right:3%;}
+        /*#left-section img {width:100%}*/
+        #right-section {float:left;width:55%;}
+        #right-section .inner {text-align:center;}
+        #right-section .inner .content{text-align:center;padding-top:23.5185%}
+    </style>
+    <title>도쿠먼트 테스트</title>
+</head>
+<body>
+<div id="wrap">
+    <div class="inner">
+        <section id="left-section">
+            <img src="/asset/img/left_image.png" alt="" class="target_image">
+        </section>
+        <section id="right-section">
+            <div class="inner">
+                <div class="content">
+                    <div style="margin-bottom:68px;">
+                        <img src="/asset/img/formel_camele.png" alt="">
+                    </div>
+                    <div style="margin-bottom:101px;">
+                        <img src="/asset/img/text_image_2.png" alt="">
+                    </div>
+                    <div style="margin-bottom:41px;">
+                        <img src="/asset/img/text_image_1.png" alt="">
+                    </div>
+                    <div class="text-group">
+                        <p>변하지 않는 나만의 가치를 유지 하면서도</p>
+                        <p>트랜드에 민감한 고객에게 새로움을 더해주는 슈즈 & 백 멀티 편집 브랜드.</p>
+
+                        <p>‘포멜카멜레’는 카멜레온처럼 자신의 본질을</p>
+                        <p>변화시키지 않으면서 늘 새로운 환경과 변화에</p>
+                        <p>완벽하게 적응하는 모습을 통해</p>
+                        <p>3040의 시크함을 상징적으로 표현한 브랜드입니다.</p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<script>
+        var resize_left_image =function()
+        {
+			var targets = $('.target_image');
+
+				var wh = $(window).height();
+				targets.add("#wrap").height(wh);
+
+		}
+		$(window).on('resize.resize_left_image',resize_left_image),resize_left_image();
+
+    </script>
+</body>
+</html>

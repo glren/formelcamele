@@ -1,0 +1,14 @@
+{
+  "name": "simple_layer",
+  "homepage": "https://github.com/glren/simple_layer",
+  "_release": "75436e2984",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "75436e2984517b0f3b49ed68334eb685bd67d717"
+  },
+  "_source": "https://github.com/glren/simple_layer.git",
+  "_target": "*",
+  "_originalSource": "simple_layer",
+  "_direct": true
+}

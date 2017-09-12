@@ -1,0 +1,235 @@
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Qn0tHQ_PUt0Nbw2As0pX&submodules=geocoder"></script>
+<script src="/bower_components/handlebars/handlebars.js"></script>
+<div id="shop">
+    <div class="inner">
+        <section id="left-section">
+            <img src="/asset/img/shop_left_image.png" alt="" class="target_image">
+        </section>
+        <section id="right-section">
+            <div class="inner">
+                <div class="content">
+                    <div class="layout">
+
+                        <div class="maps">
+                            <h2><img src="/asset/img/shop_title.png" alt=""></h2>
+                            <div id="map"></div>
+                        </div>
+
+                        <div class="control">
+                            <h2><img src="/asset/img/shop_sub_title.png" alt=""></h2>
+                            <div class="control-1">
+                                <select class="selects" name="" id="si">
+                                    <option value="">도시 선택</option>
+                                </select>
+                            </div>
+                            <div class="control-2">
+                                <select class="selects" name="" id="do">
+                                    <option value="">지역구 선택</option>
+                                </select>
+                            </div>
+                            <div class="control-1">
+                                <select class="selects" name="" id="shops">
+                                    <option value="">매장 선택</option>
+                                </select>
+                            </div>
+                            <div class="info-group shopinfo-wrap">
+                                <dl>
+                                    <dt>STORE :</dt>
+                                    <dd></dd>
+                                </dl>
+                                <dl>
+                                    <dt>ADDRESS :</dt>
+                                    <dd></dd>
+                                </dl>
+                                <dl>
+                                    <dt>TEL :</dt>
+                                    <dd></dd>
+                                </dl>
+                                <dl>
+                                    <dt>BUSINEESS HOURS :</dt>
+                                    <dd></dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+<script id="si-template" type="text/x-handlebars-template">
+    <option value="{{si}}">{{si}}</option>
+</script>
+<script id="do-template" type="text/x-handlebars-template">
+    <option value="{{do}}">{{do}}</option>
+</script>
+<script id="shop-template" type="text/x-handlebars-template">
+    <option value="{{id}}">{{name}}</option>
+</script>
+<script id="shopinfo-template" type="text/x-handlebars-template">
+    <dl>
+        <dt>STORE :</dt>
+        <dd>{{name}}</dd>
+    </dl>
+    <dl>
+        <dt>ADDRESS :</dt>
+        <dd>{{ds_address}}</dd>
+    </dl>
+    <dl>
+        <dt>TEL :</dt>
+        <dd>{{tel}}</dd>
+    </dl>
+    <dl>
+        <dt>BUSINEESS HOURS :</dt>
+        <dd>{{busineess_hour}}</dd>
+    </dl>
+</script>
+<script>
+    var pos = [];
+    var marker = [];
+    var info = [];
+
+    var mapOptions = {
+        center: new naver.maps.LatLng(37.5546088,127.025518),
+        zoom: 3
+    };
+    var map = new naver.maps.Map('map', mapOptions);
+
+    var CustomOverlay = function(options) {
+        this._element = $('<div style="position:absolute;left:0;top:0;width:70;text-align:center">' +
+                            '<div style="position:absolute;top:-50px;left:-42px;"><img src="/asset/img/map_icon.png" style="width:56px;"/></div>' +
+                            '</div>')
+
+        this.setPosition(options.position);
+        this.setMap(options.map || null);
+    };
+
+    CustomOverlay.prototype = new naver.maps.OverlayView();
+    CustomOverlay.prototype.constructor = CustomOverlay;
+
+    CustomOverlay.prototype.setPosition = function(position) {
+        this._position = position;
+        this.draw();
+    };
+
+    CustomOverlay.prototype.getPosition = function() {
+        return this._position;
+    };
+
+    CustomOverlay.prototype.onAdd = function() {
+        var overlayLayer = this.getPanes().overlayLayer;
+
+        this._element.appendTo(overlayLayer);
+    };
+
+    CustomOverlay.prototype.draw = function() {
+        if (!this.getMap()) {
+            return;
+        }
+
+        var projection = this.getProjection(),
+            position = this.getPosition(),
+            pixelPosition = projection.fromCoordToOffset(position);
+
+        this._element.css('left', pixelPosition.x);
+        this._element.css('top', pixelPosition.y);
+    };
+
+    CustomOverlay.prototype.onRemove = function() {
+        var overlayLayer = this.getPanes().overlayLayer;
+
+        this._element.remove();
+        this._element.off();
+    };
+
+    $.getJSON('/api/shop/get_si',function(data){
+        $.each(data.shops,function(i,shop){
+
+
+            var source   = $("#si-template").html();
+            var template = Handlebars.compile(source);
+            var html    = template(shop);
+            $('#si').append(html);
+        });
+    });
+
+    $.getJSON('/api/shop/all',function(data){
+        $.each(data.shops,function(i,shop){
+            if( i == 0 ) {
+                map.setCenter(new naver.maps.LatLng(shop.lat,shop.leng));
+            }
+            pos[shop.id] = shop;
+            var overlay = new CustomOverlay({
+                position: new naver.maps.LatLng(shop.lat, shop.leng)
+            });
+            overlay.setMap(map);
+        })
+    });
+
+    $('#si').on("change",function(){
+        if( this.value == ''){
+            return false;
+        }
+        var source   = $("#do-template").html();
+        var template = Handlebars.compile(source);
+        var html    = template({do:'지역구 선택'});
+        $('#do').empty().append(html);;
+        $.getJSON('/api/shop/get_do',{si:this.value},function(data){
+            $.each(data.shops,function(i,shop){
+                var source   = $("#do-template").html();
+                var template = Handlebars.compile(source);
+                var html    = template(shop);
+                $('#do').append(html);
+            });
+        });
+    });
+
+
+    $('#do').on("change",function(){
+        if( this.value == '지역구 선택'){
+            return false;
+        }
+        var source   = $("#do-template").html();
+        var template = Handlebars.compile(source);
+        var html    = template({do:'매장 선택'});
+        $('#shops').empty().append(html);;
+
+        $.getJSON('/api/shop/get_shop',{si:$('#si').val(),do:$('#do').val()},function(data){
+            $.each(data.shops,function(i,shop){
+                var source   = $("#shop-template").html();
+                var template = Handlebars.compile(source);
+                var html    = template(shop);
+                $('#shops').append(html);
+            });
+        });
+    });
+
+    $('#shops').on('change',function(){
+        if( this.value == '매장 선택'){
+            return false;
+        }
+
+        map.setCenter(new naver.maps.LatLng(pos[this.value].lat,pos[this.value].leng))
+        map.setOptions({
+            zoom: 12
+        });
+        var source   = $("#shopinfo-template").html();
+        var template = Handlebars.compile(source);
+        var html    = template(pos[this.value]);
+        $('.shopinfo-wrap').empty().append(html);
+
+
+    });
+
+    var resize_left_image =function()
+    {
+        var targets = $('.target_image');
+            var wh = $(window).height();
+            targets.add("#wrap").height(wh);
+    }
+    $(window).on('resize.resize_left_image',resize_left_image),resize_left_image();
+</script>

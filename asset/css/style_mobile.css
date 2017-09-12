@@ -1,0 +1,102 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+/* common */
+body {margin: 0;padding: 0;font-family:Nanum Gothic,Sans-Serif;}
+ul {list-style: none;margin:0;padding:0;overflow:hidden;}
+
+/* gnb */
+#gnb {}
+#gnb:after {padding:40px 0 0 0;display:block;content:''}
+#gnb .inner{position:absolute;top:0;z-index:1000;height:60px;background:#fff;padding:10px 4%;box-sizing: border-box;width:100%}
+#gnb .inner * {vertical-align: top}
+#gnb .inner .menu_btn {padding:0;margin:8px 20px 0 0;border:0;background:transparent;}
+#gnb .inner .menu_btn img {width:25px}
+#gnb h1 {margin:0;padding:0;display:inline-block;}
+#gnb .inner .menu {display:inline-block;float:right;margin:4px 10px 0 0;min-width:30.2812%;}
+#gnb ul li {display:inline-block;}
+
+.main-logo {width:75px; margin-top:5px;}
+#gnb ul li.facebook {margin-right:20.4375%; margin-top:5px; vertical-align: middle}
+#gnb ul li.facebook img {width:11px}
+#gnb ul li.insta {margin-right:20.125%; margin-top:5px; vertical-align: middle}
+#gnb ul li.insta img {width:20px;}
+#gnb ul li.cart {margin-top:5px; vertical-align: middle}
+#gnb ul li.cart img {width:16px;}
+
+@media (min-width:412px) {
+    #gnb ul li.facebook {margin-right:56px;}
+    #gnb ul li.insta {margin-right:56px;}
+}
+
+.bx-next img,
+.bx-prev img{width:14px}
+#gnb .menu-text {margin-top:36px;margin-left:26px;display:none;opacity:0}
+#gnb .menu-text ul li {display:block;margin-bottom:25px;}
+#gnb .menu-text ul li a {font-size:16px;text-decoration: none;color:#000;font-weight:bold;}
+#gnb .menu-text ul.sub-item li {margin-top:29px;padding-left:15px;}
+#gnb .menu-text ul.sub-item li a {font-size:14px;color:#5b5b5b;font-weight:normal;}
+body.sero #gnb{display:none;}
+
+/*#gnb .black {display:none;}*/
+/*#gnb:hover .black {display:block;}*/
+/*#gnb:hover .white {display:block;}*/
+
+
+.menu-bg { -vendor-animation-duration: 6s; -vendor-animation-iteration-count: infinite; }
+.menu-bg {position:absolute;top:0;bottom:0;left:0;right:0;z-index:1;background:#fff;opacity:0;display:none;z-index:500}
+
+
+/* main */
+#main {overflow:hidden;}
+#main .main-slider {}
+#main .bxslider li { min-height: 100vh;}
+#main .bx-controls {position:absolute;top:50%}
+#main .bx-controls .bx-prev {left:5px;position:fixed;}
+#main .bx-controls .bx-next {right:5px;position:fixed;}
+
+body.campaign {background:#eee3e3}
+#campaign {padding:36.5% 0 0 0;}
+#campaign .bx-wrapper{position:relative;}
+body.sero #campaign{padding:0 0 0 0}
+#campaign .bx-controls {position:absolute;top:45.7%}
+#campaign li img {width:100%}
+#campaign .bx-controls .bx-prev {left:5px;position:fixed}
+#campaign .bx-controls .bx-next {right:5px;position:fixed;}
+#campaign .campaign-image {position:absolute;top:86px;left:15px;}
+body.sero .campaign-image {display:none;}
+#campaign .campaign-image img {width:166px;}
+
+/* intro */
+#intro {}
+#intro .inner img {width:100%}
+
+
+/* shop */
+#shop {}
+#shop .inner {padding:10px;}
+#shop #map {height:200px;width:100%;margin-bottom:20px;}
+#shop .select-wrap {margin-bottom:23px;}
+#shop .select-wrap select {width:100%;border:1px solid #000;padding:10px 5px;font-size:16px;background:#fff;height:35px}
+#shop .select-wrap:last-child {margin-bottom:17px}
+#shop .text-wrap {font-size:14px;}
+#shop .mobile-title-shop {margin-bottom:17px;}
+#shop .mobile-title-shop img {width:198px;}
+
+/* layer */
+.sl_layer {height:auto; position:absolute; z-index:9999; top:28.5%;display:none;width:100%;}
+/*@media screen and (orientation:portrait) { .sl_layer{top:0;} }*/
+.sl_layer .layer-bxslider li>img {width:100%;max-width:1200px;opacity:0}
+.layer-bxslider-wrap {position:relative;max-width:1200px;}
+.layer-bxslider-wrap .bx-controls {position:absolute;top:50%;width:100%}
+.layer-bxslider-wrap .bx-controls .bx-prev {left:16px;position:absolute;}
+.layer-bxslider-wrap .bx-controls .bx-next {right:16px;position:absolute;}
+.closeBox2 {top:-18px;right:-60px;position:absolute;}
+.simple_layer_bg {position:fixed;top:0;left:0;right:0;bottom:0;background:#eee3e3;opacity:.9;display:none;}
+@media screen and (orientation:landscape) {
+    .sl_layer{ top:0;}
+    .sl_layer .layer-bxslider li>img {width:100%;height:100%}
+}

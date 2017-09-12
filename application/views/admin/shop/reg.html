@@ -1,0 +1,111 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <h2>매장관리 - 수정/등록/삭제</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <form action="/admin/api/shop/save" id="shop_reg" method="post">
+                    <input type="hidden" name="id" value="<?php echo $shop['id']?>">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                매장 기본정보
+                                <small>매장에서 사용되는 필수 데이터들 입니다.</small>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="si" class="form-control" value="<?php echo $shop['si']?>" placeholder="도시설정" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="do" class="form-control" value="<?php echo $shop['do']?>" placeholder="지역설정" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="name" class="form-control" value="<?php echo $shop['name']?>" placeholder="매장명" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="card-inside-title">
+                                <a href="https://www.google.co.kr/maps" target="_blank">구글맵 검색하러 가기</a>
+                                <small>위도,경도는 구글에서 검색 후 주소줄에 표시된 위도와 경도를 사용해주세요.</small>
+                            </h2>
+                            <div class="row clearfix">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="lat" class="form-control" value="<?php echo $shop['lat']?>" placeholder="위도를 입력해주세요" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="leng" class="form-control" value="<?php echo $shop['leng']?>" placeholder="경도를 입력해주세요" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                매장 상세 정보
+                                <small>하단에 매장에 대한 자세한 정보를 표시하는 부분 입니다.</small>
+                                <small>필수 값들은 아니지만, 사용자 페이지에서 안보여질 수 있습니다.</small>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="ds_address" class="form-control" value="<?php echo $shop['ds_address']?>" placeholder="매장주소" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="tel" class="form-control" value="<?php echo $shop['tel']?>" placeholder="연락처" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="busineess_hour" class="form-control" value="<?php echo $shop['busineess_hour']?>" placeholder="매장운영시간정보" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="actions text-right">
+                                <button type="submit" class="btn btn-success waves-effect">저장</button>
+                                <a href="/admin/main/shop_list" class="btn btn-warning waves-effect">취소</a>
+                                <?php if (isset($shop['id']) ) : ?>
+                                    <button type="button" class="btn btn-danger waves-effect delete-shop" data-id="<?php echo $shop['id']?>">삭제</button>
+                                <?php endif?>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
